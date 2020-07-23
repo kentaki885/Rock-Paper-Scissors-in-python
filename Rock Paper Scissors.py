@@ -1,76 +1,68 @@
-import random
 import time
+import random
+
 
 def intro():
- print("hello whats your name ?")
- name = input("-")
- print("well..."+name.title()+" we are going to play rock, paper, scissors!")
- print()
-intro()
+    '''Greeting user'''
+
+    name = input('\nHello! Whats your name ? ').title()
+    print(f'Well ... {name} we are going to play scissors, paper, rock\n')
 
 
-def results():
+def output(action, message):
+    '''Deliver message with action each time when user wins / lose the game'''
+
+    print('\nHmmm, My Turn! .... I Play ... \n')
+    time.sleep(1)
+    print(action.title() + '\n')
+    print(message + '\n')
+
+
+def playing():
+    '''Asking user to enter their choice and deciding who won the game'''
+
     action = random.choice(("Rock", "Paper", "Scissors"))
+    player_action = input('what are you going to play ?(Scissors, Paper, Rock): ').title()
 
-    print("what are you going to play ?(rock, paper, scissors)")
-    playersAction = input("-")
+    if player_action == action:
+        output(action, 'Tie!')
 
-    if playersAction.title() == action :
-     print("Hmmm, my turn!...I play...")
-     time.sleep(1)
-     print()
-     print(action.title())
-     print()
-     print('Tie!')
-    elif playersAction.title() == "Rock" and action == "Paper":
-     print("Hmmm, my turn!...I play...")
-     time.sleep(1)
-     print()
-     print(action.title())
-     print()
-     print("paper covers rock, You lose!")
-    elif playersAction.title() == "Rock" and action == "Scissors":
-     print("Hmmm, my turn!...I play...")
-     time.sleep(1)
-     print()
-     print(action.title())
-     print()
-     print("Rock destroys scissors, You win!")
-    elif playersAction.title() == "Paper" and action =="Scissors":
-        print("Hmmm, my turn!...I play...")
-        time.sleep(1)
-        print()
-        print(action.title())
-        print()
-        print("Scissors cuts paper, You lose!")
-    elif playersAction.title() == "Paper" and action == "Rock":
-        print("Hmmm, my turn!...I play...")
-        time.sleep(1)
-        print()
-        print(action.title())
-        print()
-        print("Paper covers rock, You win!")
-    elif playersAction.title() == "Scissors" and action == "Rock":
-        print("Hmmm, my turn!...I play...")
-        time.sleep(1)
-        print()
-        print(action.title())
-        print()
-        print("Rock destroys scissors, You lose!")
-    elif playersAction.title() == "Scissors" and action == "Paper":
-        print("Hmmm, my turn!...I play...")
-        time.sleep(1)
-        print()
-        print(action.title())
-        print()
-        print("Scissors cuts paper, You win!")
+    elif player_action == "Rock" and action == "Paper":
+        output(action, 'Paper covers Rock, You lose!')
+
+    elif player_action == "Rock" and action == "Scissors":
+        output(action, 'Rock destroys scissors, You win!')
+
+    elif player_action == "Paper" and action == "Scissors":
+        output(action, 'Scissors cuts Paper, You lose!')
+
+    elif player_action == "Paper" and action == "Rock":
+        output(action, 'Paper covers Rock, You win!')
+
+    elif player_action == "Scissors" and action == "Rock":
+        output(action, 'Rock destroys scissors, You lose!')
+
+    elif player_action == "Scissors" and action == "Paper":
+        output(action, 'Scissors cuts Paper, You win!')
+
     else:
         print("You probably misspelled a word!")
 
-results()
-print("\tPlay again ?(yes/no)")
-playagain = input("-")
-while playagain == "yes" or playagain == "y":
-    results()
-    print("\tPlay again ?(yes/no)")
-    playagain = input("-")
+
+def main():
+    '''Entry of the program'''
+
+    while True:
+        intro()
+        playing()
+
+        option = input('Do you want to play again (y/n)? ').lower()
+
+        if option != 'y':
+            break   # Breaking while loop
+
+        print()
+
+
+if __name__ == '__main__':
+    main()
